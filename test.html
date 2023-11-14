@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Image Mask</title>
+    <style>
+        #imageContainer {
+            position: relative;
+        }
+
+        #clickableArea {
+            position: absolute;
+            top: 900px; /* Задайте нужное положение верхнего края области */
+            left: 1900px; /* Задайте нужное положение левого края области */
+            width: 150px; /* Задайте нужную ширину области */
+            height: 200px; /* Задайте нужную высоту области */
+            background-color: rgba(255, 0, 0, 0,5); /* Задайте цвет и прозрачность области */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="imageContainer">
+        <img src="/nice.jpg" alt="Your Image">
+        <div id="clickableArea" onclick="redirectToLink('index.html')"></div>
+    </div>
+
+    <script>
+        function redirectToLink(link) {
+            // Выполните переход по указанной ссылке
+            window.location.href = link;
+        }
+    </script>
+
+</body>
+</html>
