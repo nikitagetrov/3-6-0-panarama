@@ -61,7 +61,7 @@ function animateZoom(direction) {
 
 // Инициализация сцены и компонентов
 init({
-    texture: "/nice.jpg", // Путь к текстуре
+    texture: "image/nice.jpg", // Путь к текстуре
     stencil: "", // Путь к маске
     objects: {
         "255,0,0": "Розетка 1",
@@ -69,6 +69,14 @@ init({
         // ... и другие объекты
     }
 });
+
+// Добавьте эту функцию в ваш файл script.js
+function changeLocation(value) {
+    // Здесь вы можете выполнить нужные действия при изменении локации
+    // Например, изменить текстуру или выполнить другие действия на сцене
+    console.log("Selected location:", value);
+}
+
 
 // Инициализация сцены
 function init(json) {
@@ -197,7 +205,6 @@ function raycast(event) {
 const sensitivity = 0.8;
 
 // Обработка перемещения указателя
-// Обработка перемещения указателя
 function onPointerMove(event) {
     raycast(event);
     if (!mouseDown.x) return;
@@ -244,3 +251,22 @@ function animate() {
     e && raycast(e);
     renderer.render(scene, camera);
 }
+
+// Добавьте эту функцию в ваш файл script.js
+function changeLocation(value) {
+    // Здесь вы можете выполнить нужные действия при изменении локации
+    // Например, изменить текстуру или выполнить другие действия на сцене
+    console.log("Selected location:", value);
+    updateTexture(value);
+}
+
+// Добавьте эту функцию для обновления текстуры при смене локации
+function updateTexture(texturePath) {
+    // Загрузка новой текстуры
+    let textureLoader = new THREE.TextureLoader();
+    let newTexture = textureLoader.load(texturePath);
+
+    // Обновление материала с новой текстурой
+    material.uniforms.texture1.value = newTexture;
+}
+

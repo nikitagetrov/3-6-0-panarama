@@ -10,6 +10,13 @@
     <div id="zoomInBtn" class="zoom-btn">+</div>
     <div id="zoomOutBtn" class="zoom-btn">-</div>
 
+    <select id="locationSelect" onchange="changeLocation(this.value);">
+        <option value="image/nice.jpg">Локация 1</option>
+        <option value="image/test2.jpg">Локация 2</option>
+        <option value="image/test3.jpg">Локация 3</option>
+        <!-- Добавьте сколько угодно локаций -->
+    </select>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
     <script src="script.js"></script>
 </body>
