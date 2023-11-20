@@ -270,3 +270,4 @@ function updateTexture(texturePath) {
     material.uniforms.texture1.value = newTexture;
 }
 
+

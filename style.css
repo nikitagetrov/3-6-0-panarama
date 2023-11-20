@@ -28,22 +28,23 @@ body {
     position: absolute;
     font-size: 20px;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 5px 20px;
     border-radius: 5px;
     color: orange;
+    opacity: 0.6;
 }
 
 #zoomInBtn {
     top: 10px;
     left: 10px;
-    background-color: #fff;
+    background-color: #333;
     border: 1px solid #000;
 }
 
 #zoomOutBtn {
     top: 10px;
     left: 70px;
-    background-color: #fff;
+    background-color: #333;
     border: 1px solid #000;
 }
 
@@ -51,10 +52,11 @@ body {
     position: absolute;
     top: 650px;
     left: 70px;
-    font-size: 16px;
-    padding: 5px;
-    border-radius: 5px;
+    font-size: 25px;
+    padding: 25px;
+    border-radius: 10px;
     color: orange;
     background-color: #333;
+    opacity: 0.6;
 }
 
