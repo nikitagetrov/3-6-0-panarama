@@ -9,6 +9,56 @@ var raycaster = new THREE.Raycaster();
 var canvas = document.createElement('canvas');
 var ctx = canvas.getContext('2d');
 
+// Создайте кнопки
+var zoomInBtn = document.getElementById('zoomInBtn');
+var zoomOutBtn = document.getElementById('zoomOutBtn');
+
+// Добавьте обработчики событий для кнопок
+zoomInBtn.addEventListener('click', function() {
+    zoomIn();
+});
+
+zoomOutBtn.addEventListener('click', function() {
+    zoomOut();
+});
+
+// Ваши существующие функции zoomIn и zoomOut
+function zoomIn() {
+    //console.log("Zoom In");
+    animateZoom(-1);
+}
+
+function zoomOut() {
+    //console.log("Zoom Out");
+    animateZoom(1);
+}
+
+// Добавим функцию для плавного изменения зума
+function animateZoom(direction) {
+    let targetFov = camera.fov + direction;
+
+    // Ограничим угол обзора, чтобы избежать слишком малого или большого увеличения
+    targetFov = Math.min(Math.max(targetFov, 10), 75);
+
+    let startFov = camera.fov;
+
+    function updateFov() {
+        if ((direction > 0 && camera.fov < targetFov) || (direction < 0 && camera.fov > targetFov)) {
+            camera.fov += (targetFov - startFov) * 0.05;
+            camera.updateProjectionMatrix();
+            renderer.render(scene, camera);
+            requestAnimationFrame(updateFov);
+        } else {
+            camera.fov = targetFov;
+            camera.updateProjectionMatrix();
+            renderer.render(scene, camera);
+        }
+    }
+
+    updateFov();
+}
+
+
 // Инициализация сцены и компонентов
 init({
     texture: "/nice.jpg", // Путь к текстуре
@@ -47,6 +97,22 @@ function init(json) {
     addEventListener('resize', onWindowResize);
     animate();
 }
+
+
+
+addEventListener('DOMContentLoaded', function() {
+    var zoomInBtn = document.getElementById('zoomInBtn');
+    var zoomOutBtn = document.getElementById('zoomOutBtn');
+
+    zoomInBtn.addEventListener('click', function() {
+        zoomIn();
+    });
+
+    zoomOutBtn.addEventListener('click', function() {
+        zoomOut();
+    });
+});
+
 
 // Создание материала для отображения панорамы
 function createMaterial(img, stencil) {
@@ -127,16 +193,31 @@ function raycast(event) {
     }
 }
 
+// Коэффициент чувствительности мыши
+const sensitivity = 0.8;
+
+// Обработка перемещения указателя
 // Обработка перемещения указателя
 function onPointerMove(event) {
-    raycast(e = event);
+    raycast(event);
     if (!mouseDown.x) return;
+
     let clientX = event.clientX || event.touches[0].clientX;
     let clientY = event.clientY || event.touches[0].clientY;
-    lon = (mouseDown.x - clientX) * camera.fov / 600 + mouseDown.lon;
-    lat = (clientY - mouseDown.y) * camera.fov / 600 + mouseDown.lat;
+
+    // Уменьшаем чувствительность перемещения мыши
+    let lonDelta = (mouseDown.x - clientX) * camera.fov / 600 * sensitivity;
+    let latDelta = (clientY - mouseDown.y) * camera.fov / 600 * sensitivity;
+
+    lon += lonDelta;
+    lat += latDelta;
+
     lat = Math.max(-85, Math.min(85, lat));
+
+    mouseDown.x = clientX;
+    mouseDown.y = clientY;
 }
+
 
 // Обработка завершения перемещения указателя
 function onPointerUp() {
