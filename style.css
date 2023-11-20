@@ -17,24 +17,44 @@ body {
     position: absolute;
     font-size: 20px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: orange;
     color: #000;
     border: 1px solid #000;
     padding: 5px 10px;
     border-radius: 5px;
 }
 
+.zoom-btn {
+    position: absolute;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: orange;
+}
+
 #zoomInBtn {
     top: 10px;
     left: 10px;
+    background-color: #fff;
+    border: 1px solid #000;
 }
 
 #zoomOutBtn {
     top: 10px;
     left: 70px;
+    background-color: #fff;
+    border: 1px solid #000;
 }
 
 #locationSelect {
-    top: 10px;
-    left: 140px;
+    position: absolute;
+    top: 650px;
+    left: 70px;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    color: orange;
+    background-color: #333;
 }
+
