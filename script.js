@@ -77,6 +77,15 @@ function changeLocation(value) {
     console.log("Selected location:", value);
 }
 
+// Добавьте обработчики событий для кликабельных областей
+document.getElementById('windowView').addEventListener('click', function () {
+    handleWindowViewClick();
+});
+
+document.getElementById('kitchenView').addEventListener('click', function () {
+    handleKitchenViewClick();
+});
+
 
 // Инициализация сцены
 function init(json) {
@@ -269,5 +278,4 @@ function updateTexture(texturePath) {
     // Обновление материала с новой текстурой
     material.uniforms.texture1.value = newTexture;
 }
-
 
